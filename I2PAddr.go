@@ -63,6 +63,19 @@ func LoadKeysIncompat(r io.Reader) (k I2PKeys, err error) {
 	return
 }
 
+func LoadKeysStrings(address, both string) (I2PKeys, error) {
+	// First, validate and create the I2PAddr from the address string
+	addr, err := NewI2PAddrFromString(address)
+	if err != nil {
+		return I2PKeys{}, fmt.Errorf("invalid address: %w", err)
+	}
+
+	// Validate that 'both' //TODO
+
+	// Create and return the I2PKeys
+	return I2PKeys{Address: addr, Both: both}, nil
+}
+
 // load keys from non-standard format by specifying a text file.
 // If the file does not exist, generate keys, otherwise, fail
 // closed.
